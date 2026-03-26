@@ -1,0 +1,18 @@
+replicaCount: 1
+
+ingress:
+  host: app-dev.localhost
+
+env:
+  LOG_LEVEL: debug
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+image:
+  tag: dev

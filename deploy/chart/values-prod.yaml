@@ -1,0 +1,24 @@
+replicaCount: 3
+
+ingress:
+  host: app.localhost
+
+env:
+  LOG_LEVEL: warn
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 750m
+    memory: 768Mi
+
+hpa:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 70
+
+image:
+  tag: prod
