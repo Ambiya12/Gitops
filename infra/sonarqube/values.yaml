@@ -1,0 +1,43 @@
+community:
+  enabled: true
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1536Mi
+
+sonarProperties:
+  sonar.web.javaOpts: "-Xms512m -Xmx1024m"
+  sonar.ce.javaOpts: "-Xms256m -Xmx512m"
+
+postgresql:
+  enabled: true
+  auth:
+    username: sonar
+    password: sonar
+    database: sonarqube
+  primary:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - name: sonar.localhost
+      path: /
+  annotations: {}
+
+initSysctl:
+  enabled: true
+  vmMaxMapCount: 262144
