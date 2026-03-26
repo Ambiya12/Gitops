@@ -6,13 +6,13 @@ set -euo pipefail
 
 if [[ $# -lt 2 ]]; then
   echo "Usage: $0 <repo-url> <registration-token> [runner-name]"
-  echo "Example: $0 https://github.com/Ambiya12/Gitops ghp_runner_token gitops-m2-runner"
+  echo "Example: $0 https://github.com/Ambiya12/Gitops ghp_runner_token gitops-arm64-runner"
   exit 1
 fi
 
 REPO_URL="$1"
 RUNNER_TOKEN="$2"
-RUNNER_NAME="${3:-gitops-m2-runner}"
+RUNNER_NAME="${3:-gitops-arm64-runner}"
 RUNNER_VERSION="2.327.1"
 RUNNER_DIR="${HOME}/actions-runner"
 
