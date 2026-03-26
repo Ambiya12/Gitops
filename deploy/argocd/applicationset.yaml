@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gitops-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - env: dev
+            namespace: dev
+            valuesFile: values-dev.yaml
+            autoSync: "true"
+          - env: staging
+            namespace: staging
+            valuesFile: values-staging.yaml
+            autoSync: "true"
+          - env: prod
+            namespace: prod
+            valuesFile: values-prod.yaml
+            autoSync: "false"
+  template:
+    metadata:
+      name: gitops-app-{{ .env }}
+      labels:
+        env: {{ .env }}
+    spec:
+      project: galyst
+      source:
+        repoURL: https://github.com/Ambiya12/Gitops.git
+        targetRevision: main
+        path: deploy/chart
+        helm:
+          valueFiles:
+            - {{ .valuesFile }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: {{ .namespace }}
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+  templatePatch: |
+    {{- if eq .autoSync "true" }}
+    spec:
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+    {{- end }}
