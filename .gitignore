@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Docker
+*.tar
+
+# Local data and temp
+.tmp/
+tmp/
+
+# Helm/Kubernetes generated files
+*.lock
+
+# SonarQube scanner local files
+.scannerwork/
+
+# Argo CD CLI local config
+.argocd/
